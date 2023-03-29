@@ -8,9 +8,9 @@ image_resource:
     tag: 1.19-alpine3.16
 
 inputs:
-  - name: repo
+  - name: utils
 
 run:
   path: go
   args: ["test", "-v", "./..."]
-  dir: repo
+  dir: util
