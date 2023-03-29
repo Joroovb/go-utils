@@ -13,4 +13,4 @@ inputs:
 run:
   path: go
   args: ["vet", "-v", "./..."]
-  dir: util
+  dir: utils
