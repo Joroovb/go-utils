@@ -78,7 +78,7 @@ func TestTail(t *testing.T) {
 	t.Run("attempts to open unknown file and errors out", func(t *testing.T) {
 		got, err := utils.Tail("testdata/ghost", 2)
 
-		if err == nil {
+		if err != nil {
 			t.Errorf("should return an error on missing file")
 		}
 

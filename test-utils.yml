@@ -11,18 +11,28 @@ resources:
       tag: 1.19-alpine3.16
 
 jobs:
-  - name: test utils package
+  - name: test-utils-package
     plan:
       - get: go-image
       - get: repo
         trigger: true
-      - task: vet package
+      - task: vet-package
         image: go-image
         config:
           platform: linux
           inputs:
             - name: repo
           run:
-            path: /bin/sh
+            path: go
             args: ["vet", "./..."]
+            dir: repo
+      - task: test-package
+        image: go-image
+        config:
+          platform: linux
+          inputs:
+            - name: repo
+          run:
+            path: go
+            args: ["test", "-v", "./..."]
             dir: repo
