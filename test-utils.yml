@@ -1,0 +1,28 @@
+resources:
+  - name: repo
+    type: git
+    source:
+      uri: https://github.com/joroovb/go-utils
+
+  - name: go-image
+    type: registry-image
+    source:
+      repository: golang
+      tag: 1.19-alpine3.16
+
+jobs:
+  - name: test utils package
+    plan:
+      - get: go-image
+      - get: repo
+        trigger: true
+      - task: vet package
+        image: go-image
+        config:
+          platform: linux
+          inputs:
+            - name: repo
+          run:
+            path: /bin/sh
+            args: ["vet", "./..."]
+            dir: repo
